@@ -26,7 +26,7 @@ Each step has a **Do** list, a **Check** (what you should see) and a **Learn** i
 - [ ] **Do:** `hf download Qwen/Qwen2.5-1.5B-Instruct-GGUF qwen2.5-1.5b-instruct-fp16.gguf --local-dir models`
 - [ ] **Predict before running:** 1.5B parameters at 16 bits each is X GB, and at about 4.5 bits each it's Y GB. Write both numbers down.
 - [ ] **Do:** `llama-quantize models/qwen2.5-1.5b-instruct-fp16.gguf models/qwen2.5-1.5b-instruct-q4_k_m.gguf Q4_K_M`
-- [ ] **Check:** `ls -lh models/` shows about 3.6 GB and about 1.1 GB. Compare these with your predictions.
+- [ ] **Check:** `stat -f "%z %N" models/*.gguf` prints exact sizes in bytes (about 3.56 billion and 1.12 billion). Compare these with your predictions. Your `ls` is aliased to `eza`, which rounds to decimal GB (3.6G). macOS's own `/bin/ls -lh` uses GiB (1024³ bytes), so it shows 3.3G for the same file.
 - [ ] **Learn:** Qwen released the weights in BF16. Why is FP16 "full precision" here, and why would FP32 gain nothing? What do "K" and "M" mean in Q4_K_M? (Look up k-quants and block-wise quantization with per-block scales.)
 
 ## Step 3: Smoke test
